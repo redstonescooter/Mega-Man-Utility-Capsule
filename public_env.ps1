@@ -1,0 +1,1 @@
+$RootPath = 'C:\HOME\Programming\manage_chatgpts_memories\backend'
