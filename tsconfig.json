@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": ".",
+    "rootDir": ".",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "target": "es2022",
+
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts"], // Compile all .ts files
+  "exclude": ["node_modules"]
+}
