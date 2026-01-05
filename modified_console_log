@@ -1,0 +1,10 @@
+function debugTimestamp() {
+  const now = new Date();
+  return now.toISOString().slice(0, -1).replace("T", " ");
+}
+const originalLog = console.log.bind(console);
+console.log = (args?: any) => {
+  const now = debugTimestamp();
+  const prefix = "[Prefix]";
+  originalLog(`${prefix} ${now} -`, args);
+};
