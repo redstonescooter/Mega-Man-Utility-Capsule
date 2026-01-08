@@ -1,10 +1,29 @@
-function debugTimestamp() {
+function debugTimestamp(onlyHours = true): string {
   const now = new Date();
-  return now.toISOString().slice(0, -1).replace("T", " ");
+  if (onlyHours) {
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  } else {
+    return now.toISOString().slice(0, -1).replace("T", " ");
+  }
 }
+// console.log(debugTimestamp());
 const originalLog = console.log.bind(console);
-console.log = (args?: any) => {
+console.log = function (args: any) {
+  const argsArr = Array.isArray(args) ? args : [args];
+
+  const prefix = "[YT CP]";
   const now = debugTimestamp();
-  const prefix = "[Prefix]";
-  originalLog(`${prefix} ${now} -`, args);
+  const firstArg = `${prefix} - ${now}`;
+  argsArr.unshift(firstArg);
+  const seperatedArgs = argsArr
+    .map((item) =>
+      typeof item === "object" && item !== null
+        ? JSON.stringify(item)
+        : String(item)
+    )
+    .join("||");
+  originalLog(seperatedArgs);
 };
